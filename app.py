@@ -22,6 +22,7 @@ df = df.replace('', np.NaN)
 
 
 app = Dash(external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 DATA_TABLE_STYLE = {
     "style_data_conditional": [
