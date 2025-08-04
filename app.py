@@ -17,7 +17,7 @@ import dash_bootstrap_templates
 data = pd.read_csv('./test_all_new.csv', keep_default_na=False)
 df = pd.DataFrame(data)
 df.drop(df.columns[df.columns.str.contains('unnamed', case=False)], axis=1, inplace=True)
-df = df.replace('', np.NaN)
+df = df.replace('', np.nan)
 
 
 
