@@ -16,6 +16,7 @@ name_dropdown_labels = list(df['Name'].unique())
 app = Dash(__name__,
            use_pages=True,
            external_stylesheets=[dbc.themes.BOOTSTRAP])
+server = app.server
 
 page_names = ['Home',
               'Overall Results',
