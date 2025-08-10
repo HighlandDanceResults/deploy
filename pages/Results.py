@@ -1,8 +1,24 @@
 import dash
-from dash import html, dcc, Input, Output, State
+from dash import html, dcc, Input, Output, State, dash_table
 import dash_bootstrap_components as dbc
 import pandas as pd
 import numpy as np
+import plotly.graph_objs as go
+
+
+def table_style_data_conditional(df_chosen):
+    styles = [
+        {"if": {"column_id": "Overall"}, "backgroundColor": "#f9f9f9"},
+        {
+            'if': {'row_index': 'odd'},
+            'backgroundColor': "#f9f9f9",
+        },
+        {
+            'if': {'column_id': 'Name'},
+            'textAlign': 'left'
+        }
+    ]
+    return styles
 
 
 dash.register_page(__name__)
@@ -15,13 +31,21 @@ df = df.replace('', np.nan)
 year_dropdown_labels = list(df['Year'].unique())
 name_dropdown_labels = list(df['Name'].unique())
 
+DATA_TABLE_STYLE = {
+    "style_data_conditional": table_style_data_conditional(dcc.Store(id='df_chosen', data=[])),
+    "style_header": {
+        "color": "black",
+        "backgroundColor": "#E6E6E6",
+        "fontWeight": "bold",
+    }
+}
 
 
 competition_card = \
 dbc.Card([
     dbc.CardHeader(html.B("Select Data for Overall Results"),
                    style = {
-                       "background-color": "#f4e0ff"
+                       "backgroundColor": "#f4e0ff"
                    }),
     dbc.CardBody([
         dbc.Col([
@@ -40,7 +64,7 @@ dbc.Card([
         dbc.Col([
             dbc.Row([
                 dcc.Markdown('''**2) Choose Competition**'''),
-                dcc.Dropdown(['test comp'],
+                dcc.Dropdown(['Please Choose 1)'],
                              id= 'comp_dropdown',
                              searchable=True,
                              optionHeight=50,
@@ -53,7 +77,7 @@ dbc.Card([
         dbc.Col([
             dbc.Row([
                 dcc.Markdown('''**3) Choose Age Group**'''),
-                dcc.Dropdown(['test age'],
+                dcc.Dropdown(['Please Choose 1) & 2)'],
                              id= 'age_dropdown',
                              searchable=True,
                              optionHeight=50,
@@ -75,12 +99,49 @@ dbc.Card([
 
 ])
 
-
+results_card =  dbc.Card([
+                dbc.CardHeader(html.B("Results"),style = {
+                       "backgroundColor": "#f4e0ff"
+                   }),
+                dbc.CardBody([
+                    dcc.Markdown('''Please select year, competition, and age group first.''', id = 'data_markdown'),
+                    html.Center([
+                        dcc.Markdown('', id = 'table_title'),
+                        dash_table.DataTable(id = 'table',
+                            style_as_list_view=True,
+                            sort_action = 'native',
+                            style_data_conditional = DATA_TABLE_STYLE.get("style_data_conditional"),
+                            style_header=DATA_TABLE_STYLE.get("style_header"),
+                            style_cell = {'textAlign': 'center',
+                                          'font-family':'sans-serif'},
+                            style_table={'overflowX': 'auto',
+                                'minWidth': '90vw', 'width': '90vw', 'maxWidth': '90vw'
+                                        },
+                            fixed_columns={'headers': True, 'data': 1},
+                    )]),
+                ]),
+                dbc.CardBody([
+                    html.Center(dcc.Markdown('', id = 'graph_title')),
+                    dcc.Graph(id = 'graph',
+                        figure={
+                            'data': [],
+                            'layout': go.Layout(                                
+                                xaxis =  {'showgrid': False, 'zeroline': False, 'ticks':'', 'showticklabels':False},
+                                yaxis = {'showgrid': False, 'zeroline': False, 'ticks':'', 'showticklabels':False}                                                               
+                                )
+                            })
+                    # dbc.Row(table_card),
+                    # dbc.Row(plot_card)
+                ])
+            ], style= {"padding": "0px", "margin-bottom": "0.5em"}
+)
 
 layout = html.Div([
     dbc.Container([
         html.Br(),
-        competition_card
+        competition_card,
+        html.Br(),
+        results_card
     ], fluid=True,
         style = {'minWidth': '96vw',
                     'width': '96vw',
@@ -88,5 +149,6 @@ layout = html.Div([
                     'align-items': 'center',
                     "height": "80vh"})
 ])
+
 
 

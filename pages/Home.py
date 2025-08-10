@@ -32,7 +32,7 @@ layout = \
                     [
                     dbc.CardHeader('Wecome to the Unofficial Highland Dance Results Page!',
                                    style = {
-                                       "background-color": "#f4e0ff"
+                                       "backgroundColor": "#f4e0ff"
                                    }),
                     dbc.CardBody(
                             dcc.Markdown('''                              
@@ -44,7 +44,7 @@ layout = \
                             ),
                     ],
                         style={
-                               "width":"70%"
+                            #    "width":"70%"
                                }
                     ),
                     width = 8
