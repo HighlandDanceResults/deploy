@@ -205,6 +205,7 @@ def update_table_and_graph(n_clicks, year, comp, age, df_data):
             'legend': {'orientation': 'h', 'y': 0, 'yanchor': "bottom", 'yref': "container"},
             'margin': {'l': 15, 'r': 0, 't': 15},
             'hovermode': 'x',
+            'displayModeBar': False
         }
     }
 
@@ -260,7 +261,35 @@ def reset_outputs(n_clicks):
 
     return [], empty_graph, ['''Please select year, competition, and age group first.'''], None, None, None, [], []
 
+# ------------------------------------------------------------
+@app.callback(
+    Output('search_table', 'data', allow_duplicate=True),
+    Output('search_markdown', 'children', allow_duplicate=True),
+    Input('search_submit_btn', 'n_clicks'),
+    State('search_name_dropdown', 'value'),
+    State('df_store', 'data'),
+    prevent_initial_call=True
+)
+def update_dancer_search(n_clicks, search_name, df_data):
+    # Early exit if button not clicked
+    if n_clicks is None or n_clicks < 1:
+        # return no updates (or could return empties)
+        return dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update, dash.no_update
+    
+    df = pd.DataFrame(df_data)
 
+    desired_cols = ['Year',
+                    'Competition',
+                    'Age Group']
+    undesired_cols = ['Name',
+                      'Number']
+    
+    returned_df = df[df['Name'] == search_name]
+    returned_df = returned_df.drop(undesired_cols, axis = 1)
+    returned_df = returned_df[desired_cols + [col for col in list(returned_df.columns) if col not in desired_cols]].to_dict('records')
+    
+    return returned_df, ''
+    
 # ------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
