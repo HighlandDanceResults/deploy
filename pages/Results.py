@@ -118,14 +118,19 @@ html.Div([
                     )]),
         html.Br(),
         html.Center(dcc.Markdown('', id = 'graph_title')),
-                dcc.Graph(id = 'graph',
+                dcc.Graph(
+                    id = 'graph',
+                    config= {'displayModeBar':False,
+                            'modeBarButtonsToRemove': ['pan2d','lasso2d']
+                            },
                     figure={
                         'data': [],
                         'layout': go.Layout(                                
                             xaxis =  {'showgrid': False, 'zeroline': False, 'ticks':'', 'showticklabels':False},
                             yaxis = {'showgrid': False, 'zeroline': False, 'ticks':'', 'showticklabels':False}                                                               
                             )
-                        })
+                        },
+                    )
 ])
 # dbc.Card([
 #                 dbc.CardHeader(html.B("Results"),style = {

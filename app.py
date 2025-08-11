@@ -206,9 +206,8 @@ def update_table_and_graph(n_clicks, year, comp, age, df_data):
             'legend': {'orientation': 'h', 'y': 0, 'yanchor': "bottom", 'yref': "container"},
             'margin': {
                 # 'l': 15, 'r': 0, 
-                       't': 15},
-            'hovermode': 'x',
-            'displayModeBar': False
+                       't': 30},
+            'hovermode': 'x',   
         }
     }
 
