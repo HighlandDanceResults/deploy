@@ -70,29 +70,32 @@ dbc.Card([
         ]),
 ])
 
-results_card = \
-dbc.Card([
-    dbc.CardHeader(html.B("Results"),style = {
-            "backgroundColor": "#f4e0ff"
-        }),
-    dbc.CardBody([
-        dcc.Markdown('''Please select dancer.''', id = 'search_markdown'),
-        html.Center([
-            dcc.Markdown('', id = 'table_title'),
-            dash_table.DataTable(id = 'search_table',
-                style_as_list_view=True,
-                sort_action = 'native',
-                style_data_conditional = DATA_TABLE_STYLE.get("style_data_conditional"),
-                style_header=DATA_TABLE_STYLE.get("style_header"),
-                style_cell = {'textAlign': 'center',
-                                'font-family':'sans-serif'},
-                style_table={'overflowX': 'auto',
-                    'minWidth': '90vw', 'width': '90vw', 'maxWidth': '90vw'
-                            },
-                fixed_columns={'headers': True, 'data': 1},
-        )]),
-    ])
+results_card = html.Div([
+    dcc.Markdown('''Please select dancer.''', id = 'search_markdown'),
+    html.Center([
+        dcc.Markdown('', id = 'table_title'),
+        dash_table.DataTable(id = 'search_table',
+            style_as_list_view=True,
+            sort_action = 'native',
+            style_data_conditional = DATA_TABLE_STYLE.get("style_data_conditional"),
+            style_header=DATA_TABLE_STYLE.get("style_header"),
+            style_cell = {'textAlign': 'center',
+                            'font-family':'sans-serif'},
+            style_table={'overflowX': 'auto',
+                'minWidth': '90vw', 'width': '90vw', 'maxWidth': '90vw'
+                        },
+            fixed_columns={'headers': True, 'data': 1},
+    )]),
 ])
+
+# dbc.Card([
+    # dbc.CardHeader(html.B("Results"),style = {
+    #         "backgroundColor": "#f4e0ff"
+    #     }),
+    # dbc.CardBody([
+
+    # ])
+# ])
 
 layout = html.Div([
     dbc.Container([

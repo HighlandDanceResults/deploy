@@ -29,7 +29,8 @@ page_paths = ['Home',
               ]
 
 navbar = dbc.NavbarSimple(
-    children=[
+    children= \
+        [
         dbc.Nav(
             [
                 dbc.NavItem(
@@ -40,7 +41,7 @@ navbar = dbc.NavbarSimple(
                     )
                 ) for i in range(len(page_names))
             ]+
-            [html.Img(src = 'assets/dance_shoes_white.png', alt = 'image', height = '40px')]
+            [dbc.Nav(dbc.NavItem(html.Img(src = 'assets/dance_shoes_white.png', alt = 'image', height = '40px')))]
         )
     ],
     brand="Unofficial Highland Dance Results",
