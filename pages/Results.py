@@ -101,7 +101,7 @@ dbc.Card([
 
 results_card =  \
 html.Div([
-       dcc.Markdown('''Please select year, competition, and age group first.''', id = 'data_markdown'),
+       dcc.Markdown('''''', id = 'data_markdown'),
                     html.Center([
                         dcc.Markdown('', id = 'table_title'),
                         dash_table.DataTable(id = 'table',

@@ -71,7 +71,7 @@ dbc.Card([
 ])
 
 results_card = html.Div([
-    dcc.Markdown('''Please select dancer.''', id = 'search_markdown'),
+    dcc.Markdown('''''', id = 'search_markdown'),
     html.Center([
         dcc.Markdown('', id = 'table_title'),
         dash_table.DataTable(id = 'search_table',
@@ -86,6 +86,7 @@ results_card = html.Div([
                         },
             fixed_columns={'headers': True, 'data': 1},
     )]),
+    html.Br(),
 ])
 
 # dbc.Card([
