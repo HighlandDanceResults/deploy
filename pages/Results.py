@@ -116,6 +116,7 @@ html.Div([
                                         },
                             fixed_columns={'headers': True, 'data': 1},
                     )]),
+        html.Br(),
         html.Center(dcc.Markdown('', id = 'graph_title')),
                 dcc.Graph(id = 'graph',
                     figure={

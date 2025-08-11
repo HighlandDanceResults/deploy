@@ -190,9 +190,9 @@ def update_table_and_graph(n_clicks, year, comp, age, df_data):
             'name': str(dancer_name),
             'x': x_cols,
             'y': y_vals,
-            'mode': 'lines+markers',           # show both lines and markers
+            'mode': 'lines',           # show both lines and markers
             'marker': {'symbol': 'circle', 'size': 8},
-            'line': {'shape': 'linear'},       # you can change to 'spline' if you like
+            'line': {'shape': 'linear', 'width': 10},       # you can change to 'spline' if you like
             'type': 'scatter'
         }
         figure_data.append(trace)
@@ -204,7 +204,9 @@ def update_table_and_graph(n_clicks, year, comp, age, df_data):
             'yaxis': {'autorange': 'reversed', 'side': 'left', 'fixedrange': True},
             'xaxis': {'side': 'top', 'fixedrange': True},
             'legend': {'orientation': 'h', 'y': 0, 'yanchor': "bottom", 'yref': "container"},
-            'margin': {'l': 15, 'r': 0, 't': 15},
+            'margin': {
+                # 'l': 15, 'r': 0, 
+                       't': 15},
             'hovermode': 'x',
             'displayModeBar': False
         }
