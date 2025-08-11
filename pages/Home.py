@@ -39,7 +39,7 @@ layout = \
                                 Checkout [scotdance.app] (https://scotdance.app/#/competitions/), which also has a mobile app! This website originated because some comps do not use the app.
 
                         
-                                Email with results or corrections at <highlanddanceresults@gmail.com>. This is a passion project maintained by a single person in my free time. Please by nice :) 
+                                Email with results or corrections <highlanddanceresults@gmail.com>. This is a passion project maintained by a single person in my free time. Please be nice :) 
                                 ''')
                             ),
                     ],
