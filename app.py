@@ -117,6 +117,27 @@ def update_table_and_graph(n_clicks, year, comp, age, df_data):
 
     df = pd.DataFrame(df_data)
 
+    if year == None or comp == None or age == None:
+        empty_graph = {
+            'data': [],
+            'layout': {
+                'xaxis': {
+                    'showgrid': False,
+                    'showticklabels': False,
+                    'ticks': '',
+                    'zeroline': False
+                },
+                'yaxis': {
+                    'showgrid': False,
+                    'showticklabels': False,
+                    'ticks': '',
+                    'zeroline': False
+                }
+            }
+        }
+
+        return empty_graph, [], ['''Please select year, competition, and age group first.'''], [], []
+
     # Filter selection
     df_chosen = df[
         (df['Year'] == year) &
@@ -238,7 +259,25 @@ def update_dancer_search(n_clicks, search_name, df_data):
     returned_df = returned_df[desired_cols + [col for col in list(returned_df.columns) if col not in desired_cols]].to_dict('records')
     
     return returned_df, ''
-    
+# ------------------------------------------------------------
+@app.callback(
+    Output('search_table', 'data', allow_duplicate=True),
+    # Output('graph', 'figure', allow_duplicate=True),
+    Output('search_markdown', 'children', allow_duplicate=True),
+    # Output('year_dropdown', 'value', allow_duplicate=True),
+    Output('search_name_dropdown', 'value', allow_duplicate=True),
+    # Output('age_dropdown', 'value', allow_duplicate=True),
+    # Output('search_table', 'd', allow_duplicate=True),
+    # Output('graph_title', 'children', allow_duplicate=True),
+    Input('search_reset_btn', 'n_clicks'),
+    prevent_initial_call=True
+)
+def search_reset_outputs(n_clicks):
+    if not n_clicks:
+        return no_update
+
+    return [], ['''Please select name from list.'''], None
+
 # ------------------------------------------------------------
 if __name__ == '__main__':
     app.run(debug=True)
